@@ -1,0 +1,62 @@
+fileTypes: [
+  'noml'
+]
+name: 'NOML'
+patterns: [
+  {include: '#string_quoted'}
+  {include: '#string_literal'}
+  {include: '#value'}
+  {include: '#object'}
+  {include: '#property'}
+  {include: '#comment'}
+]
+repository:
+  object:
+    begin: '[A-Za-z_][\\w.-]*(?=([^{/;"\']|/(?=[^/])|"([^"\\\\]|\\\\.)*"|\'[^\']*\')*\\{)'
+    beginCaptures: 0: name: 'keyword.other.noml'
+    end: '{'
+    patterns: [
+      {include: '#string_quoted'}
+      {include: '#string_literal'}
+      {include: '#value'}
+      {include: '#function'}
+      {include: '#comment'}
+    ]
+  property:
+    begin: '[A-Za-z_][\\w.-]*'
+    beginCaptures: 0: name: 'entity.name.function'
+    end: '}(;*)|(;+)'
+    endCaptures:
+      1: name: 'keyword.operator.noml'
+      2: name: 'keyword.operator.noml'
+    patterns: [
+      {include: '#string_quoted'}
+      {include: '#string_literal'}
+      {include: '#value'}
+      {include: '#function'}
+      {include: '#comment'}
+    ]
+  comment:
+    name: 'comment.line.double-slash.noml'
+    begin: '//'
+    end: '$'
+  function:
+    name: 'variable.language.noml'
+    match: '[A-Za-z_][\\w.-]*(?=\\s*["\']|\\s+[\\d.-])'
+  string_quoted:
+    name: 'string.quoted.double.noml'
+    begin: '"'
+    end: '"'
+    patterns: [{include: '#escape'}]
+  string_literal:
+    name: 'string.quoted.single.noml'
+    begin: "'"
+    end: "'"
+  value:
+    match: '[\\d.-][\\w.-]*'
+    name: 'constant.numeric.noml'
+  escape:
+    name: 'constant.character.escape.noml'
+    match: '\\\\(\\{\\w*}|.)'
+
+scopeName: 'text.noml'

@@ -1,0 +1,17 @@
+{
+  "name": "language-noml",
+  "author": "phaux <phaux4@gmail.com",
+  "version": "1.0.0",
+  "description": "NOML support for Atom",
+  "keywords": [
+    "noml",
+    "configuration",
+    "grammar",
+    "syntax"
+  ],
+  "repository": "https://github.com/phaux/atom-language-noml",
+  "license": "MIT",
+  "engines": {
+    "atom": "^1.15"
+  }
+}
